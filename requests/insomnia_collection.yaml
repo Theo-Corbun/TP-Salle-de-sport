@@ -1,0 +1,58 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: Salle-de-sport
+meta:
+  id: wrk_3bbe897e837742769d2c96cb60754b12
+  created: 1789459502255
+  modified: 1789459502255
+  description: ""
+collection:
+  - url: http://localhost:8000/
+    name: requete base
+    meta:
+      id: req_f2484027ed84468a9f179aefcddbbb46
+      created: 1789459662374
+      modified: 1789465486079
+      isPrivate: false
+      description: ""
+      sortKey: -1789459662374
+    method: GET
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8000/cours
+    name: test
+    meta:
+      id: req_ff24d8ab9c7c4995a42a75390da3a0ff
+      created: 1789465551016
+      modified: 1789465615211
+      isPrivate: false
+      description: ""
+      sortKey: -1789465551016
+    method: POST
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_24ebe714f9c886eb85676790b99b5d02f7a838f8
+    created: 1789459502258
+    modified: 1789459502258
+environments:
+  name: Base Environment
+  meta:
+    id: env_24ebe714f9c886eb85676790b99b5d02f7a838f8
+    created: 1789459502257
+    modified: 1789459502257
+    isPrivate: false
