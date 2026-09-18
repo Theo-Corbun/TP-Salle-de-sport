@@ -25,3 +25,21 @@
 1. **Sous-ressource `/cours/{id}/creneaux`** : Un créneau horaire dépend directement de la discipline sportive dispensée ; son cycle de vie est lié au cours parent.
 2. **Création via `/creneaux/{id}/reservations`** : L'acte de réservation cible un créneau précis. La réponse renvoie un code `201 Created` avec un en-tête `Location: /reservations/{id}` désignant l'URI propre de la réservation créée.
 3. **Annulation via `PATCH /reservations/{id}`** : L'annulation consiste à modifier l'attribut `statut` à `"annulee"` plutôt que d'utiliser un verbe dans l'URL (`/annuler`) ou un `DELETE`, ce qui préserve l'historique d'occupation.
+
+## 4. Format de réponse des collections (Enveloppe)
+
+Toutes les collections paginées retournent un objet JSON respectant cette structure uniforme :
+
+```json
+{
+  "data": [],
+  "pagination": {
+    "offset": 0,
+    "limit": 20,
+    "total": 45
+  },
+  "links": {
+    "next": "/cours?offset=20&limit=20",
+    "prev": null
+  }
+}

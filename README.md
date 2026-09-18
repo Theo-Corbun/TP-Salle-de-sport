@@ -6,9 +6,8 @@ Sujet n° 3 - Salle de sport
 ## Stack
 Langage : Python 3.12+   /   Framework HTTP : FastAPI   /   Client HTTP : Insomnia
 
-## Prérequis
-- Python installé avec `pip`
-- DB Browser for SQLite (pour visualiser les tables)
+## Stratégie de pagination
+Pagination par offset (`offset`, `limit`) avec enveloppe de réponse (`data`, `pagination`, `links`) et tri stable sur `(type, id)` pour garantir la cohérence des pages.
 
 ## Lancer le projet
 
@@ -29,12 +28,7 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 pip install fastapi "uvicorn[standard]" sqlmodel
 ```
 
-### 4. Initialiser la base de données (si non présente)
-```powershell
-python -c "import sqlite3; con = sqlite3.connect('Salle-de-sport.db'); cur = con.cursor(); cur.executescript(open('kits/salle-de-sport/schema.sql', encoding='utf-8').read()); cur.executescript(open('kits/salle-de-sport/seed.sql', encoding='utf-8').read()); con.close()"
-```
-
-### 5. Démarrer l'API
+### 4. Démarrer l'API
 ```powershell
 python -m uvicorn src.main:app --reload
 ```
