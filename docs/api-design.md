@@ -43,3 +43,57 @@ Toutes les collections paginées retournent un objet JSON respectant cette struc
     "prev": null
   }
 }
+
+## 5. Gestion des erreurs et format Problem Details (RFC 9457)
+
+En cas d'erreur cliente ou métier, l'API renvoie un corps JSON standardisé :
+
+```json
+{
+  "type": "about:blank",
+  "title": "Conflict",
+  "status": 409,
+  "detail": "Un adhérent avec cet email existe déjà.",
+  "instance": "/adherents"
+}
+
+## 6. Sous-ressources et Actions Métier (TP 4)
+
+### 6.1 Hiérarchie des sous-ressources
+- `GET /cours/{cours_id}/creneaux` : Liste l'ensemble des créneaux horaires associés à un cours précis.
+- `POST /cours/{cours_id}/creneaux` : Crée un créneau directement rattaché à ce cours.
+
+### 6.2 Action métier de réservation
+- `POST /creneaux/{creneau_id}/reservations` : Inscription d'un adhérent à une séance donnée.
+  - Règles d'intégrité :
+    - Le créneau doit exister (sinon `404 Not Found`).
+    - L'adhérent doit exister (sinon `404 Not Found`).
+    - Un adhérent ne peut pas réserver deux fois le même créneau (`409 Conflict`).
+
+    ## 7. Cache HTTP et Négociation de Contenu (TP 5)
+
+### 7.1 Cache conditionnel (ETag & 304 Not Modified)
+- Sur les routes de consultation unitaire (`GET /cours/{cours_id}`, `GET /adherents/{adherent_id}`) :
+  - En-tête de réponse `ETag` : hash MD5 représentant la version de la ressource.
+  - En-tête de réponse `Cache-Control: private, max-age=60`.
+  - Si le client transmet l'en-tête `If-None-Match` correspondant à l'ETag courant : le serveur répond immédiatement avec `304 Not Modified` (sans corps de réponse).
+
+### 7.2 Négociation de contenu (Accept & 406 Not Acceptable)
+- L'API supporte nativement `application/json` et `*/*`.
+- Si le client demande un type MIME incompatible via l'en-tête `Accept` (ex. `application/xml`) :
+  - Le serveur retourne une erreur `406 Not Acceptable` au format RFC 9457 `Problem Details`.
+
+  ## 8. Sécurité et Contrôle de Débit (TP 6)
+
+### 8.1 Authentification par clé API (`X-API-Key`)
+- **Lecture (`GET`)** : Publique, aucune clé requise pour consulter les cours, créneaux et adhérents.
+- **Écriture (`POST`, `PATCH`, `DELETE`)** : Sécurisée, requiert l'en-tête HTTP `X-API-Key: gym_secret_key_2026`.
+- **En cas d'échec** : Retourne `401 Unauthorized` au format RFC 9457 :
+  ```json
+  {
+    "type": "about:blank",
+    "title": "Unauthorized",
+    "status": 401,
+    "detail": "Clé API manquante ou invalide.",
+    "instance": "/cours"
+  }

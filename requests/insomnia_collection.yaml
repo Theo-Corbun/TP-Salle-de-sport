@@ -43,6 +43,215 @@ collection:
         send: true
         store: true
       rebuildPath: true
+  - url: http://localhost:8000/cours/9999
+    name: 404 error
+    meta:
+      id: req_cfe189fa60f84f53897b3f7bc0dcbb74
+      created: 1791879203388
+      modified: 1791879454555
+      isPrivate: false
+      description: ""
+      sortKey: -1791879203388
+    method: GET
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8000/adherents
+    name: 422 error
+    meta:
+      id: req_9ad5bc0abd1a48f1a56f7cb15d43ccab
+      created: 1791879250420
+      modified: 1791879444302
+      isPrivate: false
+      description: ""
+      sortKey: -1791879250421
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "nom": "A",
+          "email": "pas-un-email"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8000/adherents
+    name: 409 error
+    meta:
+      id: req_87a8697662814212abfdc0e767b3de8f
+      created: 1791879434870
+      modified: 1791879861469
+      isPrivate: false
+      description: ""
+      sortKey: -1791879226904.5
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "nom": "Thomas Dupont",
+          "email": "thomas.dupont@gym.fr"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8000/cours/1/creneaux
+    name: sous ressource
+    meta:
+      id: req_0585e68c26a84d93982c847da5e50b72
+      created: 1791881166245
+      modified: 1791881561028
+      isPrivate: false
+      description: ""
+      sortKey: -1791881166245
+    method: GET
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8000/creneaux/1/reservations
+    name: test action metier
+    meta:
+      id: req_eeb96abb20294620b9ac70d0c46b818f
+      created: 1791881754008
+      modified: 1791881793304
+      isPrivate: false
+      description: ""
+      sortKey: -1791881754008
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "adherent_id": 1
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8000/cours/1
+    name: 406 error
+    meta:
+      id: req_35428ca2a0ee4f9ca45955bd22d1b343
+      created: 1791885139488
+      modified: 1791885307260
+      isPrivate: false
+      description: ""
+      sortKey: -1791885139488
+    method: GET
+    headers:
+      - name: Accept
+        value: application/xml
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8000/cours
+    name: 401 Unauthorized
+    meta:
+      id: req_7a9ce8b30590486bbbea02d4dfefadfc
+      created: 1791885590876
+      modified: 1791885628294
+      isPrivate: false
+      description: ""
+      sortKey: -1791885590876
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "type": "Crossfit",
+          "coach_id": 1
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8000/cours
+    name: 201 Created API4
+    meta:
+      id: req_94a898cc20f840f4be69d50b75bc35d9
+      created: 1791885644741
+      modified: 1791886192609
+      isPrivate: false
+      description: ""
+      sortKey: -1791885365182
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "type": "Crossfit",
+          "coach_id": 1,
+          "capacite": 15,
+          "jour_semaine": 2,
+          "heure_debut": "18:00",
+          "duree_min": 60,
+          "periode_debut": "2026-09-01",
+          "periode_fin": "2027-06-30",
+          "fuseau": "Europe/Paris"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: X-API-Key
+        value: gym_secret_key_2026
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
 cookieJar:
   name: Default Jar
   meta:
